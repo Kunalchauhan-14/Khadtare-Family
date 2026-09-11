@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicButton = document.getElementById('musicButton');
 
     const krishnaImage = document.getElementById('krishnaImage');
+    if (krishnaImage) {
+    krishnaImage.loading = 'eager';
+    krishnaImage.decoding = 'async';
+
+    if (!krishnaImage.complete) {
+        krishnaImage.setAttribute('fetchpriority', 'high');
+    }
+}
     const krishnaFallback = document.getElementById('krishnaFallback');
 
     let opened = false;
@@ -124,35 +132,58 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide the card
         opening.classList.add('hide');
 
-        // SHOW GALAXY
-        intro.classList.remove('hide');
+      // SHOW GALAXY
+intro.classList.remove('hide');
 
-        // Force animation restart
-        void intro.offsetWidth;
+// Force animation restart
+void intro.offsetWidth;
 
-        // START DIVINE JOURNEY
-        intro.classList.add('journey-start');
+// START DIVINE JOURNEY
+intro.classList.add('journey-start');
 
-        // Let Krishna come forward
-        setTimeout(() => {
+// STEP 1: travelling effect runs first
+// STEP 2: stop travelling before Krishna settles
+setTimeout(() => {
+    intro.classList.add('travel-ended');
+}, 2100);
 
-            intro.classList.remove('journey-start');
-            intro.classList.add('hide');
+// STEP 3: let Krishna finish smoothly
+setTimeout(() => {
+    intro.classList.add('krishna-settled');
+}, 4000);
 
-            // SHOW MAIN INVITATION
-            document.body.classList.add('invitation-open');
-            document.body.classList.remove('locked');
+// STEP 4: only after everything is stable,
+// fade the complete galaxy scene away
+setTimeout(() => {
 
-            window.scrollTo(0, 0);
+    intro.classList.add('journey-fadeout');
 
-            document
-                .querySelectorAll('.reveal')
-                .forEach(el => {
-                    el.classList.add('show');
-                });
+    setTimeout(() => {
 
-        }, 5200);
+        intro.classList.remove(
+            'journey-start',
+            'travel-ended',
+            'krishna-settled',
+            'journey-fadeout'
+        );
 
+        intro.classList.add('hide');
+
+        // SHOW MAIN INVITATION
+        document.body.classList.add('invitation-open');
+        document.body.classList.remove('locked');
+
+        window.scrollTo(0, 0);
+
+        document
+            .querySelectorAll('.reveal')
+            .forEach(el => {
+                el.classList.add('show');
+            });
+
+    }, 900);
+
+}, 6200);
     }, 1100);
 }
 
