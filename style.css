@@ -1242,20 +1242,24 @@ body.invitation-open .invitation {
     height: 100%;
     display: flex;
     align-items: center;
-
-
-
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
 }
 
-#krishnaImage {
+
+ #krishnaImage {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center;
+    transform: none;
+    filter: none;
+    will-change: auto;
 }
+
 
 /* =====================================================
    GALAXY JOURNEY - STARTS ONLY AFTER CARD TAP
@@ -1337,14 +1341,7 @@ body.invitation-open .invitation {
     transform-style: preserve-3d;
 }
 
-.galaxy-intro.journey-start #krishnaImage {
-    animation:
-        krishnaImageForward
-        4.8s
-        cubic-bezier(.12, .75, .18, 1)
-        forwards;
-    transform-origin: center center;
-}
+
 
 /* Glow behind Krishna */
 .galaxy-intro.journey-start .krishna-frame {
