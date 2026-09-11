@@ -1513,3 +1513,78 @@ body.invitation-open .invitation {
             0 0 350px rgba(70, 140, 255, .35);
     }
 }
+
+
+
+
+/* =========================================================
+   SMOOTH GALAXY → KRISHNA TRANSITION FIX
+   ========================================================= */
+
+/* Stop the travelling particles cleanly */
+.galaxy-intro.journey-start.travel-ended .travel-particles span {
+    animation-play-state: paused !important;
+    opacity: 0 !important;
+}
+
+/* Freeze the stars after travelling */
+.galaxy-intro.journey-start.travel-ended .galaxy-stars {
+    animation-play-state: paused !important;
+    transform: scale(1.55);
+    opacity: .62;
+}
+
+/* Freeze the space/depth movement */
+.galaxy-intro.journey-start.travel-ended .space-depth {
+    animation-play-state: paused !important;
+    transform: scale(1.18) rotate(4deg);
+}
+
+/* Stop nebula movement smoothly */
+.galaxy-intro.journey-start.travel-ended .nebula-a,
+.galaxy-intro.journey-start.travel-ended .nebula-b {
+    animation-play-state: paused !important;
+}
+
+/* Krishna reaches its final position and stays there */
+.galaxy-intro.journey-start.krishna-settled .krishna-stage {
+    animation-play-state: paused !important;
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        translateZ(0)
+        scale(.95);
+
+    filter:
+        blur(0)
+        brightness(1.08);
+}
+
+/* Keep Krishna glow stable */
+.galaxy-intro.journey-start.krishna-settled .krishna-frame {
+    animation-play-state: paused !important;
+
+    box-shadow:
+        0 0 0 7px rgba(164,202,255,.04),
+        0 0 95px rgba(61,137,255,.38),
+        inset 0 0 45px rgba(255,255,255,.06);
+}
+
+/* Smoothly fade the entire galaxy scene */
+.galaxy-intro.journey-fadeout {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .9s ease,
+        visibility 0s linear .9s;
+}
+
+/* Prevent Krishna image rendering flicker */
+.galaxy-intro #krishnaImage {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
